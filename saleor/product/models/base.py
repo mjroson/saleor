@@ -118,14 +118,15 @@ class Product(models.Model, ItemRange):
     def get_formatted_price(self, price):
         return "{0} {1}".format(price.gross, price.currency)
 
-    def get_price_per_item(self, item, discounts=None, **kwargs):
-        price = self.price
-        if price and discounts:
-            discounts = list(get_product_discounts(self, discounts, **kwargs))
-            if discounts:
-                modifier = max(discounts)
-                price += modifier
-        return price
+    #TODO: Fix when product has discount
+    #def get_price_per_item(self, item, discounts=None, **kwargs):
+    #    price = self.price
+    #    if price and discounts:
+    #        discounts = list(get_product_discounts(self, discounts, **kwargs))
+    #        if discounts:
+    #            modifier = max(discounts)
+    #            price += modifier
+    #    return price
 
     def admin_get_price_min(self):
         price = self.get_price_range().min_price
